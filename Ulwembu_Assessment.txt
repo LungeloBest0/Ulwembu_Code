@@ -1,0 +1,130 @@
+Sorting intergers
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        // Create a list to store the integers referred to as treasure chest values
+        List<int> treasureChests = new List<int>();
+        Console.WriteLine("Enter treasure chest values (type 'done' to finish):");
+
+        // Read input until the user types "done"
+        while (true)
+        {
+            string userInput = Console.ReadLine();
+            if (userInput.ToLower() == "done")
+            {
+                break;
+            }
+
+            // Convert the input to an integer
+            if (int.TryParse(userInput, out int chestValue))
+            {
+                treasureChests.Add(chestValue);
+            }
+            else
+            {
+                Console.WriteLine("Oops! That's not a valid value. Please enter a valid integer or 'done' to finish.");
+            }
+        }
+
+        // Check if the list is not empty before sorting
+        if (treasureChests.Count > 0)
+        {
+            // Sort the list of treasure chest values using Bubble Sort
+            BubbleSort(treasureChests);
+
+            // Display the sorted list
+            Console.WriteLine("Sorted list of treasure chest values:");
+            foreach (int chestValue in treasureChests)
+            {
+                Console.WriteLine(chestValue);
+            }
+        }
+        else
+        {
+            Console.WriteLine("No values to sort.");
+        }
+    }
+
+    // Bubble Sort algorithm to sort the list of treasure chest values
+    static void BubbleSort(List<int> chestList)
+    {
+        int n = chestList.Count;
+        for (int i = 0; i < n - 1; i++)
+        {
+            for (int j = 0; j < n - i - 1; j++)
+            {
+                // Swap if the element found is greater than the next element
+                if (chestList[j] > chestList[j + 1])
+                {
+                    int temp = chestList[j];
+                    chestList[j] = chestList[j + 1];
+                    chestList[j + 1] = temp;
+                }
+            }
+        }
+    }
+}
+
+
+Online Library
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        // Creating a new library instance
+        Library magicalLibrary = new Library();
+
+        // Adding books to the library
+        magicalLibrary.AddBook(new Book("Harry Potter and the Chamber of Secrets", "J.K. Rowling"));
+        magicalLibrary.AddBook(new Book("Harry Potter and the Goblet of Fire", "J.K. Rowling"));
+
+        // Registering a new member
+        Member wizardAlice = new Member("Hermione Granger");
+        magicalLibrary.RegisterMember(wizardAlice);
+
+        // Alice borrows a book
+        magicalLibrary.BorrowBook(wizardAlice, "Harry Potter and the Chamber of Secrets");
+
+        // Checking the status of the library
+        magicalLibrary.PrintLibraryStatus();
+
+        // Alice returns the book
+        magicalLibrary.ReturnBook(wizardAlice, "Harry Potter and the Chamber of Secrets");
+
+        // Checking the status of the library again
+        magicalLibrary.PrintLibraryStatus();
+    }
+}
+
+class Book
+{
+    public string Title { get; private set; }
+    public string Author { get; private set; }
+    public bool IsBorrowed { get; set; }
+
+    // Defining the book with a title and author
+    public Book(string title, string author)
+    {
+        Title = title;
+        Author = author;
+        IsBorrowed = false;
+    }
+
+    // Displaying the book information
+    public void DisplayBookInfo()
+    {
+        Console.WriteLine($"Title: {Title}, Author: {Author}, IsBorrowed: {IsBorrowed}");
+    }
+}
+
+class Member
+{
+    public string Name { get; private set; }
+    private
